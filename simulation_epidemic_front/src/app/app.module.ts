@@ -12,12 +12,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ChartsModule} from 'ng2-charts';
+import { AddSimulationComponent } from './add-simulation/add-simulation.component';
+import { UpdateSimulationComponent } from './update-simulation/update-simulation.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
     AppComponent,
     SimulationsComponent,
-    SimulationsDetailsComponent
+    SimulationsDetailsComponent,
+    AddSimulationComponent,
+    UpdateSimulationComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,12 @@ import {ChartsModule} from 'ng2-charts';
     BrowserAnimationsModule,
     HttpClientModule,
     MatPaginatorModule,
-    ChartsModule
+    ChartsModule,
+    MatGridListModule
+  ],
+  entryComponents: [
+    AddSimulationComponent,
+    UpdateSimulationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

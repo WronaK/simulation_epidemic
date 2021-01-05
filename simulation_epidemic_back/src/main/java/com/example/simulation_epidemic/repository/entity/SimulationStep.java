@@ -10,20 +10,19 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "SIMULATION_STEP")
 public class SimulationStep {
 
     @Id
     @GeneratedValue
     private long id;
     private int daySimulation;
-    private int infectedPeople;
-    private int healthyPeople;
-    private int diedPeople;
-    private int recoveredPeople;
+    private long infectedPeople;
+    private long healthyPeople;
+    private long diedPeople;
+    private long recoveredPeople;
 
-    public SimulationStep(int daySimulation, int infectedPeople,
-                          int healthyPeople, int diedPeople, int recoveredPeople) {
+    public SimulationStep(int daySimulation, long infectedPeople,
+                          long healthyPeople, int diedPeople, long recoveredPeople) {
         this.daySimulation = daySimulation;
         this.infectedPeople = infectedPeople;
         this.healthyPeople = healthyPeople;

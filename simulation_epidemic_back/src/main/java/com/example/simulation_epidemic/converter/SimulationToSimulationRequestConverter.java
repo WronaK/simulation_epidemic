@@ -4,6 +4,8 @@ import com.example.simulation_epidemic.repository.entity.Simulation;
 import com.example.simulation_epidemic.request.SimulationRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class SimulationToSimulationRequestConverter {
     public SimulationRequest toDto (Simulation simulation){
@@ -33,6 +35,7 @@ public class SimulationToSimulationRequestConverter {
                 .daysFromInfectionUntilRecovery(simulationRequest.getDaysFromInfectionUntilRecovery())
                 .daysFromInfectionToDeath(simulationRequest.getDaysFromInfectionToDeath())
                 .simulationDays(simulationRequest.getSimulationDays())
+                .simulationSteps(new ArrayList<>())
                 .build();
     }
 }

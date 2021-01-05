@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/api/simulations")
@@ -26,8 +28,11 @@ public class SimulationController {
     }
 
     @GetMapping("/all")
-    public Iterable<Simulation> getAll() {
-        return this.simulationManager.findAll();
+    public List<SimulationRequest> getAll() {
+        return StreamSupport
+                .stream(this.simulationManager.findAll().spliterator(), false)
+                .map(simulation -> simulationConverter.toDto(simulation))
+                .collect(Collectors.toList());
     }
 
     @GetMapping
@@ -42,12 +47,12 @@ public class SimulationController {
 
     @PostMapping
     public void addSimulation(@RequestBody SimulationRequest simulationRequest) {
-        this.simulationManager.addSimulation(simulationRequest);
+        this.simulationManager.addSimulation(this.simulationConverter.toEntity(simulationRequest));
     }
 
     @PutMapping
-    public Simulation updateSimulation(@RequestBody SimulationRequest simulationRequest) {
-        return this.simulationManager.updateSimulation(simulationRequest);
+    public void updateSimulation(@RequestBody SimulationRequest simulationRequest) {
+        this.simulationManager.updateSimulation(this.simulationConverter.toEntity(simulationRequest));
     }
 
     @DeleteMapping

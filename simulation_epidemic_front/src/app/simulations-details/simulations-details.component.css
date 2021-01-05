@@ -1,0 +1,83 @@
+.button-block{
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+.button-block button {
+  margin: 13px;
+  width: 20%;
+}
+
+.parameters {
+  display: grid;
+  height: 70vh!important;
+  width: 80vw!important;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 40%);
+  margin: 0 auto;
+  grid-gap: 4em;
+  align-items: stretch;
+  align-content: stretch;
+  padding: 3em;
+}
+
+.parameter {
+  border-radius: 10px;
+  border: 1px solid #222f39;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  text-align: center;
+  box-shadow: 5px 5px 10px #222f39;
+
+}
+
+.parameter-value {
+  font-size: 4em;
+  line-height: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #222f39;
+  text-shadow: 1px 1px 3px #222f39;
+}
+
+.name-simulation {
+  font-size: 3em;
+  line-height: 3em;
+}
+.parameter-description {
+  font-size: 1.2em;
+  line-height: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  color: #6f8491;
+}
+
+
+.mat-tab-body-wrapper {
+  height: 80vh;
+}
+
+.mat-table, mat-paginator {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.mat-table {
+  margin-top: 30px;
+}
+
+canvas {
+  width: 80vw!important;
+  height: 80vh!important;
+  margin: 0 auto;
+}
+
+.mat-tab-label, .mat-tab-link  {
+  color: #60ef0b!important;
+}
+

@@ -1,0 +1,17 @@
+.table-block {
+  padding: 5% 5%;
+}
+
+.button-block {
+  margin-bottom: 20px;
+}
+
+.button-block  button {
+  margin-right: 20px;
+}
+
+table, mat-paginator {
+  margin: 0 auto;
+}
+
+

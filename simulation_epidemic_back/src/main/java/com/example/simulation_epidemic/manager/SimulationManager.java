@@ -4,7 +4,7 @@ package com.example.simulation_epidemic.manager;
 import com.example.simulation_epidemic.repository.SimulationRepository;
 import com.example.simulation_epidemic.repository.entity.Simulation;
 import com.example.simulation_epidemic.repository.entity.SimulationStep;
-import com.example.simulation_epidemic.request.SimulationRequest;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,27 +34,21 @@ public class SimulationManager {
         return simulation.get().getSimulationSteps();
     }
 
-    public void addSimulation(SimulationRequest simulationRequest) {
-        Simulation simulation = new Simulation(simulationRequest.getSimulationName(),
-                simulationRequest.getPopulationSize(), simulationRequest.getInitialInfectedPeople(),
-                simulationRequest.getVirusReproductionRate(), simulationRequest.getMortalityRate(),
-                simulationRequest.getDaysFromInfectionUntilRecovery(), simulationRequest.getDaysFromInfectionToDeath(),
-                simulationRequest.getSimulationDays());
-
+    public void addSimulation(Simulation simulation) {
         simulation.simulationGeneration();
         simulationRepository.save(simulation);
     }
 
-    public Simulation updateSimulation(SimulationRequest simulationRequest){
-        Optional<Simulation> simulationOptional = simulationRepository.findById(simulationRequest.getId());
-        Simulation simulation = simulationOptional.get();
-        simulation.setSimulation(simulationRequest);
-        return simulationRepository.save(simulation);
+    public void updateSimulation(Simulation simulation){
+        Optional<Simulation> simulationOptional = simulationRepository.findById(simulation.getId());
+        Simulation simulationFind = simulationOptional.get();
+        simulationFind.deleteStepSimulation();
+        simulation.simulationGeneration();
+        simulationRepository.save(simulation);
     }
 
     public void deleteSimulation(Long id) {
         simulationRepository.deleteById(id);
     }
-
 }
 

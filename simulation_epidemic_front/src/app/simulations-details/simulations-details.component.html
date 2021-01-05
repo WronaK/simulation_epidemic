@@ -1,84 +1,91 @@
-<p>simulations-details works!</p>
-<button mat-button (click)="goBack()">Back</button>
-
-<form [formGroup]="allFG">
-  <mat-form-field>
-    <mat-label>SimulationInterface name</mat-label>
-    <input [formControl]="simulationNameFC" matInput required type="text"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Population Size</mat-label>
-    <input [formControl]="populationSizeFC" matInput required type="number"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Initial Number Infected People</mat-label>
-    <input [formControl]="initialNumberInfectedPeopleFC" matInput required type="number"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Virus Reproduction Rate</mat-label>
-    <input [formControl]="virusReproductionRateFC" matInput required type="number"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Mortality Rate</mat-label>
-    <input [formControl]="mortalityRateFC" matInput required type="number"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Days From Infection Until Recovery</mat-label>
-    <input [formControl]="daysFromInfectionUntilRecoveryFC" matInput required type="number"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Days From Infection To Death</mat-label>
-    <input [formControl]="daysFromInfectionToDeathFC" matInput required type="number"/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Numbers SimulationInterface Days</mat-label>
-    <input [formControl]="numberSimulationDaysFC" matInput required type="number"/>
-  </mat-form-field>
-  <button mat-button (click)="updateSimulation()">Save</button>
-</form>
-
-
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="daySimulation">
-      <th mat-header-cell *matHeaderCellDef>Day Simulation</th>
-      <td mat-cell *matCellDef="let simulation">{{simulation.daySimulation}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="infectedPeople">
-      <th mat-header-cell *matHeaderCellDef>Number Infected People</th>
-      <td mat-cell *matCellDef="let simulation">{{simulation.infectedPeople}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="healthyPeople">
-      <th mat-header-cell *matHeaderCellDef>Number Healthy People</th>
-      <td mat-cell *matCellDef="let simulation">{{simulation.healthyPeople}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="diedPeople">
-      <th mat-header-cell *matHeaderCellDef>Number Died People</th>
-      <td mat-cell *matCellDef="let simulation">{{simulation.diedPeople}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="recoveredPeople">
-      <th mat-header-cell *matHeaderCellDef>Number Recovered People</th>
-      <td mat-cell *matCellDef="let simulation">{{simulation.recoveredPeople}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="headElements"></tr>
-    <tr mat-row *matRowDef="let row; columns: headElements"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<div class="button-block">
+  <button mat-raised-button (click)="goBack()">Wróć do listy symulacji</button>
+  <button mat-raised-button (click)="openDialog()">Modyfikuj parametry symulacji</button>
 </div>
 
-<div class="chart-wrapper">
-  <canvas baseChart
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          [plugins]="lineChartPlugins">
-  </canvas>
-</div>
+<mat-tab-group>
+  <mat-tab label="Parametry">
+    <div class="parameters">
+      <div class="parameter">
+        <div class="parameter-value name-simulation">{{simulation?.simulationName}}</div>
+        <div class="parameter-description">Nazwa symulacji</div>
+      </div>
+      <div class="parameter">
+        <div class="parameter-value">{{simulation?.populationSize}}</div>
+        <div class="parameter-description">Wielkość populacji</div>
+      </div>
+      <div class="parameter">
+        <div class="parameter-value">{{simulation?.initialInfectedPeople}}</div>
+        <div class="parameter-description">Początkowa liczba osób zarażonych</div>
+      </div>
+      <div class="parameter">
+        <div class="parameter-value">{{simulation?.virusReproductionRate}}</div>
+        <div class="parameter-description">Wskaźnik reprodukcji wirusa</div>
+      </div>
+      <div class="parameter">
+        <div class="parameter-value">{{simulation?.mortalityRate}}</div>
+        <div class="parameter-description">Wskaźnik śmiertelności</div>
+      </div>
+      <div class="parameter">
+        <div class="parameter-value">{{simulation?.daysFromInfectionUntilRecovery}}</div>
+        <div class="parameter-description">Ilość dni, która upływa od momentu zarażenia do wyzdrowienia chorego</div>
+      </div>
+      <div class="parameter">
+        <div class="parameter-value">{{simulation?.daysFromInfectionToDeath}}</div>
+        <div class="parameter-description">Ilośc dni, która upływa od momentu zarażenia do śmieri chorego</div>
+      </div>
+      <div class="parameter">
+        <div class="parameter-value">{{simulation?.simulationDays}}</div>
+        <div class="parameter-description">Ilość dni, dla których przeprowadzona jest symulacja</div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Szczegóły symulacji">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="daySimulation">
+        <th mat-header-cell *matHeaderCellDef>Dzień symulacji</th>
+        <td mat-cell *matCellDef="let simulation">{{simulation.daySimulation}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="infectedPeople">
+        <th mat-header-cell *matHeaderCellDef>Liczba osób zarażonych</th>
+        <td mat-cell *matCellDef="let simulation">{{simulation.infectedPeople}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="healthyPeople">
+        <th mat-header-cell *matHeaderCellDef>Liczba osób zdrowych, podatnych na infekcję</th>
+        <td mat-cell *matCellDef="let simulation">{{simulation.healthyPeople}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="diedPeople">
+        <th mat-header-cell *matHeaderCellDef>Liczba osób zmarłych</th>
+        <td mat-cell *matCellDef="let simulation">{{simulation.diedPeople}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="recoveredPeople">
+        <th mat-header-cell *matHeaderCellDef>Liczba osób, któe wyzdrowiały i nabyły odporność</th>
+        <td mat-cell *matCellDef="let simulation">{{simulation.recoveredPeople}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="headElements"></tr>
+      <tr mat-row *matRowDef="let row; columns: headElements"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 8]" showFirstLastButtons></mat-paginator>
+  </mat-tab>
+
+  <mat-tab label="Wykres">
+    <div class="chart-wrapper">
+      <canvas baseChart
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+

@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>Dodaj nową symulację</h1>
+<div mat-dialog-content class="dialog-window">
+  <form [formGroup]="allFG" class="add-form">
+    <mat-form-field>
+      <mat-label>Nazwa symulacji</mat-label>
+      <input [formControl]="simulationNameFC" matInput required type="text"/>
+      <mat-error>
+        Pole wypełnione nieprawidłowo
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Wielkość populacji</mat-label>
+      <input [formControl]="populationSizeFC" matInput required type="number"/>
+      <mat-error>
+        Pole wypełnione nieprawidłowo
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Początkowa liczba osób zarażonych</mat-label>
+      <input [formControl]="initialNumberInfectedPeopleFC" matInput required type="number"/>
+      <mat-error>
+        Pole wypełnione nieprawidłowo
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Wskaźnik reprodukcji wirusa</mat-label>
+      <input [formControl]="virusReproductionRateFC" matInput required type="number"/>
+      <mat-error>
+        Pole wypełnione nieprawidłowo
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Wskaźnik śmiertelności</mat-label>
+      <input [formControl]="mortalityRateFC"
+             min="0"
+             max="1"
+             [errorStateMatcher]="errorMatcher"
+             matInput required type="number"/>
+      <mat-error>
+        <span *ngIf="mortalityRateFC.hasError('required')">Pole wypełnione nieprawidłowo</span>
+        <span *ngIf="allFG.hasError('isMoralityRate')">Wartość nie może być większa niż 1.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ilość dni, która upływa od momentu zarażenia do wyzdrowienia chorego</mat-label>
+      <input [formControl]="daysFromInfectionUntilRecoveryFC" matInput required type="number"/>
+      <mat-error>
+        Pole wypełnione nieprawidłowo
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ilośc dni, która upływa od momentu zarażenia do śmieri chorego</mat-label>
+      <input [formControl]="daysFromInfectionToDeathFC"
+             [errorStateMatcher]="errorMatcher" matInput required type="number"/>
+      <mat-error>
+        <span *ngIf="daysFromInfectionToDeathFC.hasError('required')">Pole wypełnione nieprawidłowo</span>
+        <span *ngIf="allFG.hasError('theGreater')">Wartość nie może być większa niż ilość dni,
+          która upływa od mometu zarażenia do śmierci chorego</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ilość dni, dla których przeprowadzona jest symulacja</mat-label>
+      <input [formControl]="numberSimulationDaysFC" matInput required type="number"/>
+      <mat-error>
+        Pole wypełnione nieprawidłowo
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="button-dialog">
+  <button mat-raised-button (click)="onNoClick()">Anuluj</button>
+  <button mat-raised-button (click)="save()" [disabled]="!allFG.valid">Dodaj</button>
+</div>

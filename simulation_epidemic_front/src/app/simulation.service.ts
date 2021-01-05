@@ -37,8 +37,8 @@ export class SimulationService {
     return this.http.delete(this.simulationsUrl, {params});
   }
 
-  updateSimulation(simulation: SimulationInterface): Observable<SimulationInterface> {
-    return this.http.put<SimulationInterface>(this.simulationsUrl, simulation);
+  updateSimulation(simulation: SimulationInterface): Observable<void> {
+    return this.http.put<void>(this.simulationsUrl, simulation);
   }
 
   getSimulationSteps(id: number): Observable<SimulationStepInterface[]> {

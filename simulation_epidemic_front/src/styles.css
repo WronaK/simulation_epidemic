@@ -1,4 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f2f1ef;
+  height: 100vh;
+}
+
+.add-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 2em;
+}
+
+.mat-dialog-container {
+  background: #f2f1ef !important;
+}
+
+.mat-label-element {
+  color: #60ef0b!important;
+}
+
+.dialog-window {
+  width: 60vw;
+  height: 50vh;
+}
+
+.button-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-raised-button.mat-button-disabled.mat-button-disabled {
+  border: solid 3px #7c7b78 !important;
+  color: #7c7b78;
+}
+
+.mat-raised-button {
+  margin-right: 20px;
+  color: #f2f1ef;
+  background: inherit;
+  border-radius: 20px!important;
+  border: solid 3px #222f39 !important;
+  color: #222f39;
+}
+
+table, mat-paginator, .mat-cell, .mat-header-cell {
+  background-color: #b7b6b6 !important;
+  text-align: center !important;
+}
+
+.mat-header-cell {
+  background: #222f39 !important;
+  color: #f2f1ef !important;
+}
+
+.mat-icon-button.mat-button-disabled, mat-paginator {
+  color: #222f39 !important;
+}
+
+table {
+  border-radius: 10px;
+}
+
+th.mat-header-cell:first-of-type {
+  border-radius: 10px 0 0 0;
+}
+
+th.mat-header-cell:last-of-type {
+  border-radius: 0 10px 0 0;
+}
+mat-paginator {
+  border-radius: 0  0 10px 10px;
+}
+
+.highlight {
+  background: #60ef0b !important;
+}
